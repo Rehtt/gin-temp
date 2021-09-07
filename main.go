@@ -15,7 +15,7 @@ import (
 )
 
 var (
-	configFile = flag.String("c", "配置文件地址", "./config/config.yaml")
+	configFile = flag.String("c", "./config/config.yaml", "配置文件地址")
 )
 
 func main() {
@@ -38,7 +38,7 @@ func main() {
 
 	g := gin.New()
 	router.LoadRouter(
-		gin.New(),
+		g,
 		// 中间件
 		middleware.Options,
 		middleware.NoCache,

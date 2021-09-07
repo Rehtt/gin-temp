@@ -14,9 +14,10 @@ func LoadRouter(g *gin.Engine,mw ...gin.HandlerFunc) *gin.Engine {
 		c.String(http.StatusNotFound, "The incorrect API route.")
 	})
 
-	test:=g.Group("/test")
+	api:=g.Group("/api")
+	apiV1:=api.Group("/v1")
 	{
-		test.GET("/v1",controllers.TestV1)
+		apiV1.GET("/",controllers.TestV1)
 	}
 	return g
 }
