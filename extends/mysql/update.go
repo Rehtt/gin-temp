@@ -13,6 +13,7 @@ func (u *update) Save() error {
 	return DB.Self.Save(u.table).Error
 }
 
+// Updates 更新局部
 func (u *update) Updates(where interface{}, data interface{}) error {
 	return DB.Self.Model(u.table).Where(where).Updates(data).Error
 }

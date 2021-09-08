@@ -59,11 +59,12 @@ func (p *Query) SetLimit(limit int64) *Query {
 	return p
 }
 
-func (p *Query) GetContent() {
-	DB.Self.Where(p.where).Find(p.table)
+// GetContent 查找（不包括软删除）
+func (p *Query) GetContent() error {
+	return DB.Self.Where(p.where).Find(p.table).Error
 }
 
-// 查找所有，包括软删除
-func (p *Query) GetALL() {
-	DB.Self.Unscoped().Where(p.where).Find(p.table)
+// GetALL 查找所有，包括软删除
+func (p *Query) GetALL() error {
+	return DB.Self.Unscoped().Where(p.where).Find(p.table).Error
 }
