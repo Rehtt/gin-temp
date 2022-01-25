@@ -5,12 +5,12 @@ import (
 )
 
 type Query struct {
-	limit int64
-	page  int64
+	limit int
+	page  int
 	table interface{}
 	where interface{}
-	from  int64
-	to    int64
+	from  int
+	to    int
 }
 
 func DBQuery(table, where interface{}) *Query {
@@ -21,7 +21,7 @@ func DBQuery(table, where interface{}) *Query {
 }
 
 // GetCount 获取总数
-func (p *Query) GetCount() (count int) {
+func (p *Query) GetCount() (count int64) {
 	DB.Self.Model(p.table).Where(p.where).Count(&count)
 	return
 }
@@ -39,7 +39,7 @@ func (p *Query) getContentFromRange() {
 
 // GetContentFromPage  获取指定页面内的数据
 // page 为负数时获取全部内容
-func (p *Query) GetContentFromPage(page int64) {
+func (p *Query) GetContentFromPage(page int) {
 	p.page = page
 	if page > 0 {
 		p.page--
@@ -54,7 +54,7 @@ func (p *Query) GetContentFromPage(page int64) {
 	p.getContentFromRange()
 }
 
-func (p *Query) SetLimit(limit int64) *Query {
+func (p *Query) SetLimit(limit int) *Query {
 	p.limit = limit
 	return p
 }
