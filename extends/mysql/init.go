@@ -24,15 +24,15 @@ func (db *Database) InitDB() (err error) {
 		true,
 		"Local",
 	)
-	db = &Database{}
-	db.Self, err = gorm.Open(mysql.Open(config), &gorm.Config{})
+	DB = &Database{}
+	DB.Self, err = gorm.Open(mysql.Open(config), &gorm.Config{})
 	if err != nil {
 		return err
 	}
-	dbset, _ := db.Self.DB()
+	dbset, _ := DB.Self.DB()
 	dbset.SetMaxIdleConns(10) // 用于设置闲置的连接数.设置闲置的连接数则当开启的一个连接使用完成后可以放在池里等候下一次使用。
 
-	db.autoMigrate() // 自动迁移
+	DB.autoMigrate() // 自动迁移
 	return nil
 }
 
